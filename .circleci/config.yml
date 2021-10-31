@@ -33,7 +33,7 @@ jobs:
           echo "my artifact files in a dir" > /tmp/artifacts/art-2;
     - store_artifacts:
         path: /tmp/art-1
-        destination: artifact-file-<<parameters.os>>-<<parameters.node-version>>
+        destination: artifact-file-<<parameters.os>>-<<parameters.node>>
     - store_artifacts:
         path: /tmp/artifacts
 
@@ -46,5 +46,5 @@ workflows:
           matrix:
             parameters:
               os: [linux, macos]
-              node-version: ["10.9.0", "11.9.0"]
+              node: ["10.9.0", "11.9.0"]
 
