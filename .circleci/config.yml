@@ -26,8 +26,16 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:     
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+        name: Creating Dummy Artifacts
+        command: |
+          echo "my artifact file" > /tmp/art-1;
+          mkdir /tmp/artifacts;
+          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
+    - store_artifacts:
+        path: /tmp/art-1
+        destination: artifact-file-<<parameters.os>>-<<parameters.node-version>>
+    - store_artifacts:
+        path: /tmp/artifacts
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -39,6 +47,4 @@ workflows:
             parameters:
               os: [linux, macos]
               node-version: ["10.9.0", "11.9.0"]
-              test: ["b","c"]
-              key: [1,2,3]
-              key1: [6,7,8,9]
+
